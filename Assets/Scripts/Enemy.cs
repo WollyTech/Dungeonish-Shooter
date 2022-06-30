@@ -36,7 +36,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.position = Vector3.MoveTowards(this.transform.position, _player.transform.position, _enemySpeed*Time.deltaTime);
+        if (_player != null)
+            transform.position = Vector3.MoveTowards(this.transform.position, _player.transform.position, _enemySpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

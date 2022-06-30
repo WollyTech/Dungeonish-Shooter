@@ -10,10 +10,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _health;
 
+    private bool _isAlive = true;
+
     void Update()
     {
         if (_health <= 0)
         {
+            _isAlive = false;
             Destroy(this.gameObject);
         }
     }
@@ -30,5 +33,10 @@ public class Player : MonoBehaviour
     public void Damage(int damage)
     {
         _health -= damage;
+    }
+
+    public bool isAlive()
+    {
+        return _isAlive;
     }
 }

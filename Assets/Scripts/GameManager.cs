@@ -9,8 +9,12 @@ public class GameManager : MonoBehaviour
     private SpawnManager _spawnManger;
     private Player _player;
 
-    [SerializeField]
     private bool _isGameOver;
+
+    [SerializeField]
+    private int _finalScore;
+    [SerializeField]
+    private int _coinsTotal;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +29,8 @@ public class GameManager : MonoBehaviour
     {
         if (_isGameOver == _player.isAlive())
         {
+            _finalScore = _player.FinalPoints();
+            _coinsTotal = _player.CoinsTotal();
             GameOver();
         }
     }

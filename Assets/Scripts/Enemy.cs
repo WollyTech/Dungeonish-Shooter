@@ -15,6 +15,12 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private int _damage;
 
+    [SerializeField]
+    private int _pointsToAdd;
+
+    [SerializeField]
+    private GameObject _coin;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +35,7 @@ public class Enemy : MonoBehaviour
     {
         if (_enemyHealth <= 0)
         {
-            Destroy(this.gameObject);
+            OnDeathLogic();
         }
     }
 
@@ -55,5 +61,18 @@ public class Enemy : MonoBehaviour
     public void DamageEnemy(int damage)
     {
         _enemyHealth -= damage;
+    }
+
+    public void OnDeathLogic()
+    {
+        SpawnCoin();
+        Player player = _player.GetComponent<Player>();
+        player.AddToScore(_pointsToAdd);
+        Destroy(this.gameObject);
+    }
+
+    private void SpawnCoin()
+    {
+        Instantiate(_coin, this.transform.position, Quaternion.identity);
     }
 }

@@ -7,10 +7,15 @@ public class Player : MonoBehaviour
     //we are to create movement based on horizontal and vertical axis inputs
     [SerializeField]
     private float _speed;
+
     [SerializeField]
     private int _health;
-
     private bool _isAlive = true;
+
+    [SerializeField]
+    private int _score = 0;
+    [SerializeField]
+    private int _coins;
 
     void Update()
     {
@@ -38,5 +43,25 @@ public class Player : MonoBehaviour
     public bool isAlive()
     {
         return _isAlive;
+    }
+
+    public void AddToScore(int pointsToAdd)
+    {
+        _score += pointsToAdd;
+    }
+
+    public int FinalPoints()
+    {
+        return _score;
+    }
+
+    public void AddToCoins()
+    {
+        _coins++;
+    }
+
+    public int CoinsTotal()
+    {
+        return _coins;
     }
 }

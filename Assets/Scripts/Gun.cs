@@ -14,14 +14,12 @@ public class Gun : MonoBehaviour
     {
         _barrel = GameObject.Find("Barrel").GetComponent<Transform>();
         if (_barrel == null)
-        {
             Debug.LogError("Barrel Transform not assigned!!!");
-        }
     }
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             shoot();
         }

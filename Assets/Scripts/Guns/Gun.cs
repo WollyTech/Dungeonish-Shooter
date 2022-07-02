@@ -2,27 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Gun : MonoBehaviour
 {
-    //bullet prefab
-    //barrel origin
-    [SerializeField]
-    private GameObject _bullet;
-    private Transform _barrel;
+    public string gunName;
+    public int gunID;
+    public float fireRate;
+    private protected float nextFire = 0;
+    public int price;
+    public int pointsForUnlock;
 
-    void Start()
+    void Awake()
     {
-        _barrel = GameObject.Find("Barrel").GetComponent<Transform>();
-        if (_barrel == null)
-            Debug.LogError("Barrel Transform not assigned!!!");
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            shoot();
-        }
+        Transform player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        if (player == null)
+            Debug.LogError("Player transform is not assigned on Gun script!!!");
+        transform.parent = player.transform;
     }
 
     void FixedUpdate()
@@ -35,10 +30,5 @@ public class Gun : MonoBehaviour
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = rotation;
         #endregion
-    }
-
-    private void shoot()
-    {
-        Instantiate(_bullet, _barrel.position, Quaternion.Euler(0, 0, transform.eulerAngles.z - 90));
     }
 }
